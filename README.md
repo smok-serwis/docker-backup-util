@@ -51,3 +51,16 @@ archive /var/log syslogs
 ```
 
 They are executed via bash's _source_, so beware of code injections!
+
+You can also alter RATE_LIMIT and TAR_NICE on a task basis.
+```
+stop dms-postgres
+RATE_LIMIT=none backup dms-postgres
+start dms-postgres
+
+TAR_NICE=2 archive /var/log syslogs
+```
+
+`none` means that no limit will be imposed.
+
+
