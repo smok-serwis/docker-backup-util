@@ -1,4 +1,4 @@
-FROM smokserwis/build:latest
+FROM smokserwis/build:docker-only
 
 ENV PROFILE_DIRECTORY=/profiles
 ENV RATE_LIMIT=100m
