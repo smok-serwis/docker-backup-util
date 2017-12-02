@@ -1,6 +1,11 @@
 FROM smokserwis/build:latest
 
 ENV PROFILE_DIRECTORY=/profiles
+ENV RATE_LIMIT=100m
+
+RUN apt-get update && \
+    apt-get install -y pv && \
+    apt-get clean
 
 ADD run_backup.sh /run_backup.sh
 RUN chmod ugo+x /run_backup.sh

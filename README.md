@@ -22,6 +22,9 @@ unless env _RC0_IF_NOT_ARGUMENT_ is set. In this case it will be 0.
 
 Return code 2 is returned if requested profile did not exist.
 
+You can set env _RATE_LIMIT_ to a maximum speed of compression. Default is **100m**,
+which means 100 MB/s.
+
 # Backup profiles
 
 A backup profile is a text file that uses simple commands to archive things.
@@ -31,3 +34,16 @@ A backup profile is a text file that uses simple commands to archive things.
 * _stop_ X - stop a Docker container with given name
 * _archive_ X Y - archive an arbitrary directory on filesystem, expressed
   with a absolute path X, and save it as Y.tar.gz.
+
+## Example
+
+Our daily backup is the PostgreSQL database plus system logs. We do it
+with a profile **daily**:
+
+```
+stop dms-postgres
+backup dms-postgres
+start dms-postgres
+
+archive /var/log syslogs
+```
