@@ -18,7 +18,9 @@ Volumes needed:
 
 You should run the container with the command matching the backup profile name.
 If backup profile does not exist, return code 1 will be raised,
-unless env _FAILURE_IS_SUCCESS_ is set. In this case it will be 0.
+unless env _RC0_IF_NOT_ARGUMENT_ is set. In this case it will be 0.
+
+Return code 2 is returned if requested profile did not exist.
 
 # Backup profiles
 

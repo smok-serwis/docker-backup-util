@@ -5,10 +5,10 @@ BACKUP_PREFIX="/backups/$(date +%Y%m%e)/"
 if [ "$#" -eq 0 ]; then
     echo "No backup profile specified, doing nothing"
 
-    if [ ! -z "$FAILURE_IS_SUCCESS" ]; then
-        exit 0
-    else
+    if [ -z "$RC0_IF_NOT_ARGUMENT" ]; then
         exit 1
+    else
+        exit 0
     fi
 fi
 
@@ -37,12 +37,8 @@ function start {
 
 
 if [ ! -f "${PROFILE_DIRECTORY}/$1" ]; then
-    if [ ! -z "$FAILURE_IS_SUCCESS" ]; then
-        exit 0
-    else
-        echo "Backup profile not found"
-        exit 1
-    fi
+    echo "Backup profile not found"
+    exit 2
 else
     source "${PROFILE_DIRECTORY}/$1"
 fi
