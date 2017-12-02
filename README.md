@@ -1,7 +1,7 @@
-Docker backup utility
-=====================
+# Docker backup utility
 
-# Requirements
+
+## Requirements
 
 You need to set following envs:
 
@@ -25,7 +25,7 @@ Return code 2 is returned if requested profile did not exist.
 You can set env _RATE_LIMIT_ to a maximum speed of compression. Default is **100m**,
 which means 100 MB/s.
 
-# Backup profiles
+## Backup profiles
 
 A backup profile is a text file that uses simple commands to archive things.
 
@@ -35,7 +35,7 @@ A backup profile is a text file that uses simple commands to archive things.
 * _archive_ X Y - archive an arbitrary directory on filesystem, expressed
   with a absolute path X, and save it as Y.tar.gz.
 
-## Example
+### Example of a backup profile
 
 Our daily backup is the PostgreSQL database plus system logs. We do it
 with a profile **daily**:
@@ -47,3 +47,5 @@ start dms-postgres
 
 archive /var/log syslogs
 ```
+
+They are executed via bash's _source_, so beware of code injections!
