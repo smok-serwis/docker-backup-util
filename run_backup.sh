@@ -17,7 +17,7 @@ echo "Doing backup profile $1"
 mkdir -p "${BACKUP_PREFIX}"
 
 function intertar {
-    tar -czf - "$2" | pv -L "${RATE_LIMIT}" > "${BACKUP_PREFIX}$1.tar.gz"
+    nice -n "${TAR_NICE}" tar -czf - "$2" | pv -L "${RATE_LIMIT}" > "${BACKUP_PREFIX}$1.tar.gz"
 }
 function backup {
     intertar "$1" "/volumes/$1"

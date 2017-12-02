@@ -25,6 +25,8 @@ Return code 2 is returned if requested profile did not exist.
 You can set env _RATE_LIMIT_ to a maximum speed of compression. Default is **100m**,
 which means 100 MB/s.
 
+You can set _TAR_NICE_ to change niceness of tar and gzip processes. Default is **0**.
+
 ## Backup profiles
 
 A backup profile is a text file that uses simple commands to archive things.
