@@ -10,7 +10,8 @@ You need to set following envs:
 Volumes needed:
 
 * **/root** - _/_, readonly
-  * if that worries you, attaching _/var/lib/docker/volumes_ will do. Just you
+  * if that worries you, attaching _/var/lib/docker/volumes_ to
+    containers _/root/var/lib/docker/volumes/_ will do. You just
     won't be able to use _archive_ command.
 * **/backups** - directory to put your backups to. Writable
 * **/profiles** - backup profile definitions. If you want to build

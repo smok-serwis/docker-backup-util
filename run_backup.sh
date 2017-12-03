@@ -24,7 +24,7 @@ function intertar {
     fi
 }
 function backup {
-    intertar "$1" "/volumes/$1"
+    intertar "$1" "/root/var/lib/docker/volumes/$1"
 }
 
 function archive {
