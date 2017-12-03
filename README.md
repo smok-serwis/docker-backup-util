@@ -9,23 +9,24 @@ You need to set following envs:
 
 Volumes needed:
 
-* **/volumes** - normally _/var/lib/docker/volume_, readonly.
-* **/root** - normally _/_, readonly. Required only if _archive_ is used.
+* **/root** - _/_, readonly
+  * if that worries you, attaching _/var/lib/docker/volumes_ will do. Just you
+    won't be able to use _archive_ command.
 * **/backups** - directory to put your backups to. Writable
 * **/profiles** - backup profile definitions. If you want to build
-  on this image, you can set the env _PROFILE_DIRECTORY_ to some other directory
+  on this image, you can set the env **PROFILE_DIRECTORY** to some other directory
   and put profiles there.
 
 You should run the container with the command matching the backup profile name.
 If backup profile does not exist, return code 1 will be raised,
-unless env _RC0_IF_NOT_ARGUMENT_ is set. In this case it will be 0.
+unless env **RC0_IF_NOT_ARGUMENT** is set. In this case it will be 0.
 
 Return code 2 is returned if requested profile did not exist.
 
-You can set env _RATE_LIMIT_ to a maximum speed of compression. Default is **100m**,
+You can set env **RATE_LIMIT** to a maximum speed of compression. Default is **100m**,
 which means 100 MB/s.
 
-You can set _TAR_NICE_ to change niceness of tar and gzip processes. Default is **0**.
+You can set **TAR_NICE** to change niceness of tar and gzip processes. Default is **0**.
 
 ## Backup profiles
 

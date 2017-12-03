@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BACKUP_PREFIX="/backups/$(date +%Y%m%e)/"
+BACKUP_PREFIX="/backups/$(date +%Y.%m.%d)/"
 
 if [ "$#" -eq 0 ]; then
     echo "No backup profile specified, doing nothing"
