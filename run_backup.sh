@@ -5,20 +5,26 @@ BACKUP_PREFIX="/backups/$(date +%Y.%m.%d)/"
 if [ "$#" -eq 0 ]; then
     echo "No backup profile specified, doing nothing"
 
-    if [ -z "$RC0_IF_NOT_ARGUMENT" ]; then
-        exit 1
+    if [ ! -z "${BACKUP_PROFILE}" ]; then
+        echo "Found BACKUP_PROFILE env"
     else
-        exit 0
+        if [ -z "$RC0_IF_NOT_ARGUMENT" ]; then
+            exit 1
+        else
+            exit 0
+        fi
     fi
+else
+    BACKUP_PROFILE="$1"
 fi
 
-echo "Doing backup profile $1"
+echo "Doing backup profile ${BACKUP_PROFILE}"
 
 mkdir -p "${BACKUP_PREFIX}"
 
 function intertar {
     if [ "$RATE_LIMIT" == "none" ]; then
-        nice -n "${TAR_NICE}" tar -czf - "$2" | pv -L "${RATE_LIMIT}" > "${BACKUP_PREFIX}$1.tar.gz"
+        nice -n "${TAR_NICE}" tar -czf "${BACKUP_PREFIX}$1.tar.gz" "$2"
     else
         nice -n "${TAR_NICE}" tar -czf - "$2" | pv -L "${RATE_LIMIT}" > "${BACKUP_PREFIX}$1.tar.gz"
     fi
@@ -40,9 +46,9 @@ function start {
 }
 
 
-if [ ! -f "${PROFILE_DIRECTORY}/$1" ]; then
+if [ ! -f "${PROFILE_DIRECTORY}/${BACKUP_PROFILE}" ]; then
     echo "Backup profile not found"
     exit 2
 else
-    source "${PROFILE_DIRECTORY}/$1"
+    source "${PROFILE_DIRECTORY}/${BACKUP_PROFILE}"
 fi
