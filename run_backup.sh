@@ -30,11 +30,11 @@ function intertar {
     fi
 }
 
-function archive_tar {
+function intertar2 {
     if [ "$RATE_LIMIT" == "none" ]; then
-        nice -n "${TAR_NICE}" tar -cf "${BACKUP_PREFIX}$1.tar" "/root$2"
+        nice -n "${TAR_NICE}" tar -cf "${BACKUP_PREFIX}$1.tar" "$2"
     else
-        nice -n "${TAR_NICE}" tar -cf - "/root$2" | pv -L "${RATE_LIMIT}" > "${BACKUP_PREFIX}$1.tar"
+        nice -n "${TAR_NICE}" tar -cf - "$2" | pv -L "${RATE_LIMIT}" > "${BACKUP_PREFIX}$1.tar"
     fi
 }
 
@@ -49,6 +49,11 @@ function backup {
 function archive {
     intertar "$2" "/root$1"
 }
+
+function archive_tar {
+    intertar2 "$2" "/root$1"
+}
+
 
 function stop {
     docker container stop $1
