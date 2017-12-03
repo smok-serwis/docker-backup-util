@@ -39,6 +39,9 @@ A backup profile is a text file that uses simple commands to archive things.
 * _archive_ X Y - archive an arbitrary directory on filesystem, expressed
   with a absolute path X, and save it as Y.tar.gz.
 
+* _archive_tar_ X Y - works like _archive_, but will produce only a tar at output.
+  You can follow it later with _archive_gzip_ Y
+
 ### Example of a backup profile
 
 Our daily backup is the PostgreSQL database plus system logs. We do it

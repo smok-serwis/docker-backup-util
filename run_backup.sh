@@ -29,6 +29,19 @@ function intertar {
         nice -n "${TAR_NICE}" tar -czf - "$2" | pv -L "${RATE_LIMIT}" > "${BACKUP_PREFIX}$1.tar.gz"
     fi
 }
+
+function archive_tar {
+    if [ "$RATE_LIMIT" == "none" ]; then
+        nice -n "${TAR_NICE}" tar -cf "${BACKUP_PREFIX}$1.tar" "$2"
+    else
+        nice -n "${TAR_NICE}" tar -cf - "$2" | pv -L "${RATE_LIMIT}" > "${BACKUP_PREFIX}$1.tar"
+    fi
+}
+
+function archive_gzip {
+    gzip "${BACKUP_PREFIX}$1.tar"
+}
+
 function backup {
     intertar "$1" "/root/var/lib/docker/volumes/$1"
 }
