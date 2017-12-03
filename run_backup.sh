@@ -32,9 +32,9 @@ function intertar {
 
 function archive_tar {
     if [ "$RATE_LIMIT" == "none" ]; then
-        nice -n "${TAR_NICE}" tar -cf "${BACKUP_PREFIX}$1.tar" "$2"
+        nice -n "${TAR_NICE}" tar -cf "${BACKUP_PREFIX}$1.tar" "/root$2"
     else
-        nice -n "${TAR_NICE}" tar -cf - "$2" | pv -L "${RATE_LIMIT}" > "${BACKUP_PREFIX}$1.tar"
+        nice -n "${TAR_NICE}" tar -cf - "/root$2" | pv -L "${RATE_LIMIT}" > "${BACKUP_PREFIX}$1.tar"
     fi
 }
 
